@@ -6,4 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="RabbitMQ.Stream.Client" Version="1.9.1" />
+    </ItemGroup>
+
 </Project>
