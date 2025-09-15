@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{1C32D164-A798-4D0A-A19B-8E7BABB48788}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackOfficeService", "BackOfficeService\BackOfficeService.csproj", "{021A5A87-1BBC-468B-87C4-B728A8BA1F72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourBookingBlazor", "TourBookingBlazor\TourBookingBlazor.csproj", "{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1C32D164-A798-4D0A-A19B-8E7BABB48788}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C32D164-A798-4D0A-A19B-8E7BABB48788}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C32D164-A798-4D0A-A19B-8E7BABB48788}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C32D164-A798-4D0A-A19B-8E7BABB48788}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021A5A87-1BBC-468B-87C4-B728A8BA1F72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021A5A87-1BBC-468B-87C4-B728A8BA1F72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021A5A87-1BBC-468B-87C4-B728A8BA1F72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021A5A87-1BBC-468B-87C4-B728A8BA1F72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
