@@ -73,10 +73,10 @@ public class RabbitService : IDisposable
     {
         if (_isDisposed) return;
 
-        _channel?.CloseAsync().Wait(TimeSpan.FromSeconds(5));
+        _channel?.CloseAsync();
         _channel?.Dispose();
 
-        _connection?.CloseAsync().Wait(TimeSpan.FromSeconds(5));
+        _connection?.CloseAsync();
         _connection?.Dispose();
 
         _isDisposed = true;
