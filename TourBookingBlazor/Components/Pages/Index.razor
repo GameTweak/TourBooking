@@ -1,0 +1,49 @@
+@page "/"
+@using TourBookingBlazor.Models
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="mb-3">
+                <RadzenLabel Text="Action Type" class="form-label" />
+                <div class="d-flex align-items-center gap-3 mt-2">
+                    <span class="text-muted">Cancel</span>
+                    <RadzenSwitch @bind-Value="_isBooking" />
+                    <span class="text-muted">Book</span>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <RadzenLabel Text="Name" class="form-label" />
+                <RadzenTextBox @bind-Value="_typedName" Placeholder="Enter your name" />
+            </div>
+
+            <div class="mb-3">
+                <RadzenLabel Text="Email" class="form-label" />
+                <RadzenTextBox @bind-Value="_typedEmail" Placeholder="Enter your email" />
+            </div>
+
+            <div class="mb-3">
+                <RadzenLabel Text="Tour" class="form-label" />
+                <RadzenDropDown TValue="TourView" 
+                                Data="Tours" 
+                                @bind-Value="_selectedTour" 
+                                TextProperty="@nameof(TourView.Name)"
+                                Placeholder="Select a tour" />
+            </div>
+
+            <div class="mt-4">
+                <RadzenButton Text="@(_isBooking ? "Book Tour" : "Cancel Booking")" 
+                              ButtonStyle="@(_isBooking ? ButtonStyle.Primary : ButtonStyle.Danger)" 
+                              class="me-2" Click="HandleSubmit"/>
+                <RadzenButton Text="Reset" 
+                              ButtonStyle="ButtonStyle.Light" Click="HandleReset"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-muted {
+        color: #6c757d;
+    }
+</style>

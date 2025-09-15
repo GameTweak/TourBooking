@@ -7,7 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="RabbitMQ.Client" Version="7.1.2" />
       <PackageReference Include="RabbitMQ.Stream.Client" Version="1.9.1" />
+      <PackageReference Include="Radzen.Blazor" Version="7.3.4" />
     </ItemGroup>
 
 </Project>

@@ -1,10 +1,16 @@
+using Radzen;
 using TourBookingBlazor.Components;
+using TourBookingBlazor.Features.RabbitMQ;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddRadzenComponents();
+
+builder.Services.AddScoped<RabbitService>();
 
 var app = builder.Build();
 
