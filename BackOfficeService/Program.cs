@@ -10,9 +10,14 @@ class Program
     {
         Console.WriteLine("Starting Back Office Service...");
         
-        var factory = new ConnectionFactory() { HostName = "localhost" };
-        var connection = await factory.CreateConnectionAsync();
-        var channel = await connection.CreateChannelAsync();
+        ConnectionFactory factory = new() { HostName = "localhost" };
+        IConnection connection = await factory.CreateConnectionAsync();
+
+        CreateChannelOptions channelOptions = new(
+            publisherConfirmationsEnabled: true, publisherConfirmationTrackingEnabled: true,
+            outstandingPublisherConfirmationsRateLimiter: new ThrottlingRateLimiter(50));
+        
+        IChannel channel = await connection.CreateChannelAsync(channelOptions);
         
         await channel.ExchangeDeclareAsync("tour.exchange", ExchangeType.Topic, durable: true);
         
@@ -20,11 +25,11 @@ class Program
         
         await channel.QueueBindAsync("office.queue", "tour.exchange", "tour.*");
         
-        var consumer = new AsyncEventingBasicConsumer(channel);
+        AsyncEventingBasicConsumer consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += (model, ea) =>
         {
-            var message = Encoding.UTF8.GetString(ea.Body.ToArray());
-            var routingKey = ea.RoutingKey;
+            string message = Encoding.UTF8.GetString(ea.Body.ToArray());
+            string routingKey = ea.RoutingKey;
             
             Console.WriteLine($"Routing Key: {routingKey}");
             Console.WriteLine($"Message: {message}");

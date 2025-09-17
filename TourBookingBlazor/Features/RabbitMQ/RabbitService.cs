@@ -54,10 +54,15 @@ public class RabbitService : IDisposable
 
             var encoded = Encoding.UTF8.GetBytes(json);
 
+            BasicProperties props = new();
+
+            props.DeliveryMode = DeliveryModes.Persistent;
+            
             await _channel.BasicPublishAsync(
                 exchange: TourExchange,
                 routingKey: routingKey,
                 body: encoded,
+                basicProperties: props,
                 mandatory: false);
 
             Console.WriteLine($"Published message to {routingKey}: {json}");
