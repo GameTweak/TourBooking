@@ -52,9 +52,9 @@ public partial class Index : ComponentBase
     {
         await Rabbit.PublishToQueue("tour.booked", new
         {
-            _typedName,
-            _typedEmail,
-            _selectedTour
+            Name = _typedName,
+            Email = _typedEmail,
+            PickedTour = _selectedTour
         });
     }
 
@@ -62,9 +62,9 @@ public partial class Index : ComponentBase
     {
         await Rabbit.PublishToQueue("tour.cancelled", new
         {
-            _typedName,
-            _typedEmail,
-            _selectedTour
+            Name = _typedName,
+            Email = _typedEmail,
+            PickedTour = _selectedTour
         });
     }
 }
