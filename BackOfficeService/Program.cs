@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using System.Runtime.InteropServices.JavaScript;
+using System.Text;
 using System.Text.Json;
+using System.Text.Unicode;
 using BackOfficeService.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -24,22 +26,45 @@ class Program
         var channel = await connection.CreateChannelAsync(channelOptions);
         
         await channel.ExchangeDeclareAsync("tour.exchange", ExchangeType.Topic, durable: true);
+        await channel.ExchangeDeclareAsync("admin.exchange", ExchangeType.Direct, durable: false);
         
         await channel.QueueDeclareAsync("office.queue", durable: true, exclusive: false, autoDelete: false);
         
         await channel.QueueBindAsync("office.queue", "tour.exchange", "tour.*");
         
         var consumer = new AsyncEventingBasicConsumer(channel);
-        consumer.ReceivedAsync += (model, ea) =>
+        consumer.ReceivedAsync += async (model, ea) =>
         {
-            var message = Encoding.UTF8.GetString(ea.Body.ToArray());
-            var routingKey = ea.RoutingKey;
-            
-            Console.WriteLine($"Received Key: {routingKey}");
-            HandleRequest(routingKey, message);
-            Console.WriteLine("---------------------------");
-            
-            return Task.CompletedTask;
+            try
+            {
+                var message = Encoding.UTF8.GetString(ea.Body.ToArray());
+                var routingKey = ea.RoutingKey;
+
+                Console.WriteLine($"Received Key: {routingKey}");
+                HandleRequest(routingKey, message);
+                Console.WriteLine("---------------------------");
+            }
+            catch (Exception)
+            {
+                var body = new
+                {
+                    TimeStamp = DateTime.Now,
+                    Service = "AdminService",
+                    ea.RoutingKey,
+                    ea.Body,
+                };
+
+                var json = JsonSerializer.Serialize(body);
+                
+                await channel.BasicPublishAsync(
+                    exchange: "admin.exchange",
+                    routingKey: "admin.invalid",
+                    body: Encoding.UTF8.GetBytes(json),
+                    mandatory: false);
+
+                Console.WriteLine("Invalid message logged");
+                Console.WriteLine("---------------------------");
+            }
         };
         
         await channel.BasicConsumeAsync("office.queue", autoAck: true, consumer);
