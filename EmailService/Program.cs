@@ -37,5 +37,6 @@ class Program
         
         Console.WriteLine("Listening for messages... Press [Enter] to exit");
         Console.ReadLine();
+        //Kommentar for test af git - Pernille
     }
 }
