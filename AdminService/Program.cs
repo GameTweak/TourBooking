@@ -21,6 +21,8 @@ class Program
         await channel.ExchangeDeclareAsync("admin.exchange", ExchangeType.Direct, durable: false);
         
         await channel.QueueDeclareAsync("admin.invalid", durable: false, exclusive: false, autoDelete: false);
+        await channel.QueueDeclareAsync("email.queue.DLX.queue", durable: true, exclusive: false, autoDelete: false);
+        await channel.QueueDeclareAsync("office.queue.DLX.queue", durable: true, exclusive: false, autoDelete: false);
 
         await channel.QueueBindAsync("admin.invalid", "admin.exchange", "admin.invalid");
         
@@ -43,7 +45,9 @@ class Program
         };
         
         await channel.BasicConsumeAsync("admin.invalid", autoAck: true, consumer);
-        
+        await channel.BasicConsumeAsync("email.queue.DLX.queue", autoAck: true, consumer);
+        await channel.BasicConsumeAsync("office.queue.DLX.queue", autoAck: true, consumer);
+
         Console.WriteLine("Listening for messages... Press [Enter] to view list");
         Console.ReadLine();
 

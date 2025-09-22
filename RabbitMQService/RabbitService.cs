@@ -44,13 +44,17 @@ namespace RabbitMQService
                 var (DLX, DLXroutingKey) = await SetupDeadLetter(queue, durable);
                 queueArgs.Add("x-dead-letter-exchange", DLX);
                 queueArgs.Add("x-dead-letter-routing-key", DLXroutingKey);
+
+                queueArgs.Add("x-message-ttl", 60000);
+
+                queueArgs.Add("x-max-retries", 3);
             }
 
             await _channel.ExchangeDeclareAsync(exchange, ExchangeType.Topic, durable, autoDelete: false);
 
             await _channel.QueueDeclareAsync(queue, durable, exclusive: false, autoDelete: false, arguments: queueArgs);
 
-            await _channel.QueueBindAsync(queue, exchange, "tour.booked");
+            await _channel.QueueBindAsync(queue, exchange, routingKey);
         }
 
         private async Task<(string DLX, string DLXroutingKey)> SetupDeadLetter(string queue, bool durable)
@@ -61,7 +65,7 @@ namespace RabbitMQService
             string queueName = $"{exchangeName}.queue";
             await _channel.QueueDeclareAsync(queueName, durable: durable, exclusive: false, autoDelete: false);
 
-            string routingKey = "failed";
+            string routingKey = "DeadLettered";
             await _channel.QueueBindAsync(queueName, exchangeName, routingKey: routingKey);
 
             return (exchangeName, routingKey);
