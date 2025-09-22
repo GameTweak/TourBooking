@@ -2,6 +2,7 @@
 using System.Text.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQService;
 
 namespace EmailService;
 
@@ -10,17 +11,15 @@ class Program
     static async Task Main(string[] args)
     {
         Console.WriteLine("Starting Email Service...");
-        
+
+        RabbitService rabbitService = new RabbitService("localhost");
         ConnectionFactory factory = new ConnectionFactory() { HostName = "localhost" };
         IConnection connection = await factory.CreateConnectionAsync();
         IChannel channel = await connection.CreateChannelAsync();
-        
-        await channel.ExchangeDeclareAsync("tour.exchange", ExchangeType.Topic, durable: true);
+
+        await rabbitService.SetupQueue("email.queue", "tour.exchange", "tour.booked", true, true);
+
         await channel.ExchangeDeclareAsync("admin.exchange", ExchangeType.Direct, durable: false);
-        
-        await channel.QueueDeclareAsync("email.queue", durable: true, exclusive: false, autoDelete: false);
-        
-        await channel.QueueBindAsync("email.queue", "tour.exchange", "tour.booked");
         
         AsyncEventingBasicConsumer consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += async (model, ea) =>

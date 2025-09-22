@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{1C32D164-A798-4D0A-A19B-8E7BABB48788}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackOfficeService", "BackOfficeService\BackOfficeService.csproj", "{021A5A87-1BBC-468B-87C4-B728A8BA1F72}"
@@ -7,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourBookingBlazor", "TourBookingBlazor\TourBookingBlazor.csproj", "{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminService", "AdminService\AdminService.csproj", "{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQService", "RabbitMQService\RabbitMQService.csproj", "{0B53FCA2-C6B9-47A4-94DD-4F322FDDB2CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +35,15 @@ Global
 		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B53FCA2-C6B9-47A4-94DD-4F322FDDB2CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B53FCA2-C6B9-47A4-94DD-4F322FDDB2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B53FCA2-C6B9-47A4-94DD-4F322FDDB2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B53FCA2-C6B9-47A4-94DD-4F322FDDB2CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {62EF3DBC-1F30-410E-A561-56BD20FA4D95}
 	EndGlobalSection
 EndGlobal

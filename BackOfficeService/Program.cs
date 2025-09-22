@@ -5,6 +5,7 @@ using System.Text.Unicode;
 using BackOfficeService.Models;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using RabbitMQService;
 
 namespace BackOfficeService;
 
@@ -15,7 +16,8 @@ class Program
     static async Task Main(string[] args)
     {
         Console.WriteLine("Starting Back Office Service...");
-        
+
+        RabbitService rabbitService = new RabbitService("localhost");
         ConnectionFactory factory = new() { HostName = "localhost" };
         await using var connection = await factory.CreateConnectionAsync();
 
@@ -24,13 +26,10 @@ class Program
             outstandingPublisherConfirmationsRateLimiter: new ThrottlingRateLimiter(50));
         
         var channel = await connection.CreateChannelAsync(channelOptions);
-        
-        await channel.ExchangeDeclareAsync("tour.exchange", ExchangeType.Topic, durable: true);
+
+        await rabbitService.SetupQueue("office.queue", "tour.exchange", "tour.*", true, true);
+
         await channel.ExchangeDeclareAsync("admin.exchange", ExchangeType.Direct, durable: false);
-        
-        await channel.QueueDeclareAsync("office.queue", durable: true, exclusive: false, autoDelete: false);
-        
-        await channel.QueueBindAsync("office.queue", "tour.exchange", "tour.*");
         
         var consumer = new AsyncEventingBasicConsumer(channel);
         consumer.ReceivedAsync += async (model, ea) =>
