@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackOfficeService", "BackOf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TourBookingBlazor", "TourBookingBlazor\TourBookingBlazor.csproj", "{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminService", "AdminService\AdminService.csproj", "{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BFA6778-65AC-46D9-A739-F6DF0BDF7D00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD67C6B-B0D3-4D3C-AED6-0E7E9518F3FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
